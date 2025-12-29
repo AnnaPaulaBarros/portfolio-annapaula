@@ -622,10 +622,10 @@ h1, h2, h3, h4, .mario-btn, .power-tag, .coin-counter, .social-btn, .mario-pipe-
 
 /* Área visível (a janela que só mostra 3) */
 .testimonial-slider-container {
-    width: 960px; /* 3 cards de 300px + gaps de 30px */
-    overflow: hidden;
-    position: relative;
+    width: 100%;
+    max-width: 960px;
 }
+
 
 /* Trilho que move os depoimentos */
 .testimonial-slider {
@@ -772,4 +772,98 @@ h1, h2, h3, h4, .mario-btn, .power-tag, .coin-counter, .social-btn, .mario-pipe-
 .project-card h4 {
     word-wrap: break-word; /* força quebra de linha se o texto for grande */
     font-size: 1rem;       /* opcional: reduz um pouco o tamanho */
+}
+
+.project-card {
+    width: 90%; /* Ocupa quase a tela toda no mobile */
+    max-width: 400px; /* Mas não fica gigante no desktop */
+    margin: 0 auto;
+}
+
+.card-thumb {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    /* Ajusta o título principal */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Faz com que os cards de projeto fiquem em uma coluna só */
+    .projects-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ajusta o tamanho da fonte dos textos do projeto */
+    .project-card h4 {
+        font-size: 18px;
+    }
+}
+
+.language-switcher {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões pulem de linha se necessário */
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+}
+
+.mario-btn-small { /* Ou a classe que você usou para os botões PT, EN... */
+    padding: 5px 10px;
+    font-size: 12px; /* Diminui a fonte no mobile */
+}
+
+@media (max-width: 768px) {
+
+    .project-slider-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Esconde os botões de seta no mobile */
+    .mario-pipe-yellow {
+        display: none;
+    }
+
+    /* Remove o efeito de slider */
+    .projects-container {
+        overflow: visible;
+        width: 100%;
+    }
+
+    #projects-inner {
+        flex-direction: column;
+        transform: none !important;
+    }
+
+    .project-card {
+        max-width: 90%;
+    }
+}
+
+.project-card h4,
+.project-card p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+
+@media (max-width: 768px) {
+    .about-block {
+        padding: 10px;
+    }
+
+    .anna-pixel-art {
+        width: 150px;
+    }
+
+    .dialog-box {
+        padding: 20px;
+    }
 }
