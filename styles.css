@@ -1,0 +1,775 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E VARIÁVEIS
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --mario-red: #E4002B;
+    --mario-blue: #0078F8;
+    --mario-yellow: #FFD700;
+    --mario-green: #00A650;
+    --mario-brown: #7A492B;
+    --mario-dark-bg: #1a1a1a;
+    --mario-dialog-bg: #FFF;
+    --mario-dialog-text: #000;
+    --mario-gold: #f8d800;
+}
+
+* { box-sizing: border-box; } /* Previne que o padding aumente o tamanho dos elementos */
+
+body {
+    margin: 0;
+    background: #000;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    overflow-x: hidden;
+    font-size: 14px;
+}
+
+p, li { font-size: 12px; line-height: 1.6; letter-spacing: -0.5px; }
+
+h1, h2, h3, h4, .mario-btn, .power-tag, .coin-counter, .social-btn, .mario-pipe-yellow { 
+    text-transform: uppercase; 
+    letter-spacing: -1px; 
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   HERO / START SCREEN
+   ========================================================================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/1200x800.png?text=Mario+BG') no-repeat center center/cover;
+    padding: 20px;
+}
+
+.mario-start-img { width: 200px; margin-bottom: 30px; image-rendering: pixelated; }
+.title { color: var(--mario-yellow); font-size: clamp(20px, 8vw, 40px); text-shadow: 4px 4px var(--mario-red); margin-bottom: 10px; }
+.subtitle { color: var(--mario-blue); font-size: 16px; text-shadow: 2px 2px var(--mario-yellow); margin-bottom: 20px; }
+
+/* ==========================================================================
+   COMPONENTES E BOTÕES
+   ========================================================================== */
+.mario-btn {
+    background: var(--mario-red);
+    color: white;
+    border: 4px solid var(--mario-brown);
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: clamp(10px, 4vw, 16px);
+    box-shadow: 6px 6px 0px var(--mario-dark-bg);
+    image-rendering: pixelated;
+    transition: 0.1s;
+}
+
+.mario-btn:hover {
+    background: var(--mario-blue);
+    box-shadow: 6px 6px 0px var(--mario-yellow);
+    transform: translateY(-2px);
+}
+
+.mario-pipe-yellow {
+    background: var(--mario-gold);
+    color: #000;
+    border: 4px solid #000;
+    font-size: 18px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: inset -4px -4px 0px #b88a00, 4px 4px 0px #000;
+    transition: 0.1s;
+    outline: none;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SLIDER DE PROJETOS (CORREÇÃO DE CORTE)
+   ========================================================================== */
+.project-slider-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* A "janela" - Removido o justify-content: center */
+.projects-container {
+    overflow: hidden; 
+    width: 320px; /* Largura exata do card */
+    margin: 0 auto;
+    display: block; /* Alterado de flex para block para evitar conflitos de alinhamento */
+    position: relative;
+}
+
+/* O trilho que carrega os cards */
+#projects-inner {
+    display: flex;
+    flex-wrap: nowrap; /* Garante que nunca quebre linha */
+    gap: 20px; /* O espaço exato que você usou no cálculo do JS (340 - 320) */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: max-content; /* Fundamental para o trilho não esmagar os cards */
+}
+
+/* Garante que o card mantenha o tamanho */
+.project-card {
+    flex: 0 0 320px !important; /* Impede o card de encolher */
+    width: 320px;
+}
+
+/* Garante que o card não encolha */
+.project-card {
+    flex: 0 0 320px; 
+    box-sizing: border-box;
+}
+
+#projects-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 20px; /* Espaço entre os cards */
+}
+
+.project-card {
+    flex: 0 0 320px; /* Não permite encolher */
+    background: var(--mario-dark-bg);
+    border: 4px solid var(--mario-brown);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 8px 8px 0px var(--mario-red);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 420px; /* Altura mínima para uniformidade */
+}
+.card-thumb {
+    width: 100%;        /* faz a imagem ocupar toda a largura do card */
+    height: 300px;      /* altura que você quiser, pode aumentar */
+    object-fit: cover;  /* cobre o espaço sem distorcer */
+    border-radius: 8px; /* opcional, deixa cantos arredondados */
+}
+
+/* ==========================================================================
+   SISTEMA DE IDIOMAS E AÇÕES
+   ========================================================================== */
+.language-selector {
+    position: fixed; /* Fixa no topo da tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999; /* Garante que fique acima de tudo */
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita como na sua imagem */
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    border-bottom: 2px solid var(--mario-brown);
+}
+
+.language-selector button {
+    background: var(--mario-blue);
+    color: white;
+    border: 2px solid white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.project-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.mario-btn-small {
+    flex: 1;
+    background: var(--mario-red);
+    color: white;
+    border: 3px solid var(--mario-brown);
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(7px, 2vw, 9px); /* Fonte ajustável para não vazar */
+    padding: 10px 5px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 3px 3px 0px #000;
+}
+
+.detail-btn { background: var(--mario-green) !important; }
+
+/* ==========================================================================
+   DEPOIMENTOS (STAR ROAD)
+   ========================================================================== */
+.level-section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 8px dashed var(--mario-brown);
+}
+
+.star.active { filter: grayscale(0%); color: var(--mario-yellow); }
+
+.testimonial-card {
+    background: var(--mario-dark-bg);
+    border: 4px solid var(--mario-brown);
+    padding: 20px;
+    box-shadow: 6px 6px 0px var(--mario-blue);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.social-footer {
+    padding: 40px 20px;
+    background: #000;
+    text-align: center;
+}
+
+.social-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-btn {
+    padding: 12px 20px;
+    background: var(--mario-blue);
+    color: white;
+    border: 3px solid var(--mario-brown);
+    font-size: 10px;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog-box {
+    background: white;
+    border: 6px solid #000;
+    padding: 25px;
+    color: #000;
+    width: 100%; /* Ocupa a largura do container */
+    max-width: 800px; /* Limita para não ficar largo demais em telas gigantes */
+    margin: 20px auto; /* Centraliza a caixa na tela */
+    position: relative;
+    box-shadow: 10px 10px 0px var(--mario-yellow);
+    text-align: left; /* Garante que o texto fique alinhado à esquerda dentro do retângulo */
+    line-height: 1.8; /* Melhora a leitura do texto longo */
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.mario-coin-divider {
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--mario-gold), var(--mario-gold) 10px, #000 10px, #000 20px);
+    margin-top: 20px;
+}
+
+/* Container dos Power-ups */
+.power-up-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* O Card Estilo Inventário */
+.power-up-card {
+    background: #222; /* Fundo escuro para destacar */
+    border: 4px solid var(--mario-brown);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: 0.3s ease;
+    box-shadow: 6px 6px 0px #000;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de hover - flutuando e brilhando */
+.power-up-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--mario-yellow);
+    box-shadow: 0px 0px 20px var(--mario-yellow);
+}
+
+/* Moldura para o ícone */
+.item-icon-box {
+    background: #333;
+    border: 4px inset var(--mario-brown);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    image-rendering: pixelated;
+}
+
+/* Ícone pixel art dentro da moldura */
+.pixel-icon {
+    width: 90%;             /* Ocupa 90% do quadrado */
+    height: 90%;            /* Mantém proporção dentro da moldura */
+    object-fit: contain;    /* Mantém proporção sem cortar */
+    image-rendering: pixelated; /* Para estilo pixel art nítido */
+}
+
+
+/* Textos dentro do item */
+.item-info h3 {
+    font-size: 14px;
+    color: var(--mario-yellow);
+    margin: 10px 0;
+}
+
+.item-desc {
+    font-size: 10px;
+    line-height: 1.4;
+    color: #eee;
+    margin-bottom: 15px;
+}
+
+/* Tags de Categoria */
+.power-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 8px;
+    color: #fff;
+    border: 2px solid #fff;
+    text-transform: uppercase;
+}
+
+.admin-tag { background: var(--mario-blue); }
+.design-tag { background: var(--mario-red); }
+.efficiency-tag { background: var(--mario-green); }
+
+.game-over-section {
+    text-align: center;
+    background: #000;
+    border-top: 8px solid var(--mario-red);
+    padding: 100px 20px;
+}
+
+.game-over-section .title {
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* 1. REMOVER A LINHA VERMELHA (Sombra) DOS CARDS */
+.project-card {
+    /* Se houver um box-shadow ou border-bottom com cor vermelha, vamos remover */
+    box-shadow: 6px 6px 0px #000 !important; /* Mantém apenas a sombra preta clássica */
+    border-bottom: 4px solid var(--mario-brown) !important; /* Garante que a borda seja apenas marrom */
+}
+
+/* 2. ESTILIZAR O GAME OVER COM A FONTE DO TEMA */
+.game-over-section {
+    text-align: center;
+    background: #000;
+    padding: 80px 20px;
+    border-top: 8px solid var(--mario-brown); /* Troquei o vermelho pelo marrom aqui também */
+}
+
+.game-over-section h2 {
+    font-family: 'Press Start 2P', cursive; /* Aplica a fonte de videogame */
+    color: #ff0000; /* Vermelho clássico do Game Over */
+    font-size: clamp(24px, 8vw, 60px); /* Tamanho responsivo */
+    margin-bottom: 30px;
+    text-shadow: 4px 4px 0px #5a0000;
+    animation: blink 0.8s infinite;
+}
+
+.game-over-section p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Animação de piscar */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+/* Seção de Fim de Jogo */
+.game-over-section {
+    text-align: center;
+    background: #000;
+    padding: 100px 20px;
+    border-top: 8px solid var(--mario-brown);
+}
+
+/* Letra do GAME OVER */
+.game-over-section h2 {
+    font-family: 'Press Start 2P', cursive; /* A fonte do tema */
+    color: #FF0000; /* Vermelho clássico */
+    font-size: 40px;
+    text-shadow: 4px 4px 0px #5a0000;
+    margin-bottom: 20px;
+    animation: blink-game-over 0.8s infinite;
+}
+
+/* Letras do texto de apoio */
+.game-over-section p {
+    font-family: 'Press Start 2P', cursive;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* Animação para a letra piscar */
+@keyframes blink-game-over {
+    0% { opacity: 1; }
+    50% { opacity: 0.1; }
+    100% { opacity: 1; }
+}
+
+/* Estilização da seção Game Over */
+.game-over-section {
+    text-align: center;
+    background: #000;
+    padding: 80px 20px;
+    /* Removemos qualquer linha vermelha de borda aqui se houver */
+    border-top: 8px solid var(--mario-brown); 
+}
+
+/* Formatação do botão FIM DE JOGO */
+.game-over-section .mario-btn {
+    font-family: 'Press Start 2P', cursive; /* Aplica a fonte pixelada */
+    font-size: 14px;
+    padding: 15px 30px;
+    background-color: #e60012; /* Vermelho Nintendo */
+    color: white;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0px #000; /* Sombra preta sólida (sem vermelho) */
+    cursor: pointer;
+    transition: transform 0.1s;
+    text-transform: uppercase;
+}
+
+.game-over-section .mario-btn:hover {
+    transform: scale(1.05);
+    background-color: #ff0000;
+}
+
+.game-over-section .mario-btn:active {
+    box-shadow: 2px 2px 0px #000;
+    transform: translate(4px, 4px);
+}
+
+/* Garante que o texto de agradecimento também use a fonte */
+.game-over-section p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+/* FORMATAÇÃO UNIVERSAL DOS BOTÕES (MARIO-BTN) */
+.mario-btn, 
+.mario-btn-small, 
+#startBtn, 
+.game-over-section .mario-btn {
+    font-family: 'Press Start 2P', cursive !important; /* Força a fonte em todos */
+    text-transform: uppercase;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0px #000 !important; /* Sombra preta sólida sem rastro vermelho */
+    transition: all 0.1s;
+}
+
+/* Tamanho específico para botões grandes (Start e Game Over) */
+#startBtn, .game-over-section .mario-btn {
+    padding: 15px 25px;
+    font-size: 14px;
+    background-color: #e60012;
+    color: white;
+    min-width: 200px;
+}
+
+/* Tamanho específico para botões pequenos (Git e Info) */
+.mario-btn-small {
+    padding: 8px 15px;
+    font-size: 10px;
+    color: white;
+}
+
+/* Efeito de Clique (Aperto do botão) */
+.mario-btn:active, #startBtn:active, .mario-btn-small:active {
+    box-shadow: 2px 2px 0px #000 !important;
+    transform: translate(4px, 4px);
+}
+
+/* REMOVER A LINHA VERMELHA DOS CARDS */
+.project-card {
+    box-shadow: 6px 6px 0px #000 !important;
+    border: 4px solid var(--mario-brown) !important;
+}
+
+/* ESTILIZAÇÃO DOS CAMPOS DE TEXTO (INPUT E TEXTAREA) */
+#review-form input[type="text"],
+#review-form textarea {
+    font-family: 'Press Start 2P', cursive !important; /* Fonte pixelada */
+    font-size: 10px; /* Fonte menor para caber melhor */
+    background-color: #000; /* Fundo preto estilo retro */
+    color: #fff; /* Texto branco */
+    border: 4px solid var(--mario-brown); /* Borda marrom clássica */
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+/* Efeito de foco (quando clica para digitar) */
+#review-form input[type="text"]:focus,
+#review-form textarea:focus {
+    border-color: var(--mario-yellow); /* Borda brilha em amarelo */
+    box-shadow: 0 0 10px var(--mario-yellow);
+}
+
+/* Estilo para o Placeholder (o texto que some ao digitar) */
+#review-form input::placeholder,
+#review-form textarea::placeholder {
+    color: #888;
+    font-size: 8px;
+}
+
+/* Ajuste do botão ENVIAR para alinhar com os campos */
+#review-form .mario-btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Container que limita a visualização */
+.testimonial-navigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    overflow: hidden; /* Esconde o que sai da área */
+    position: relative;
+}
+
+/* Onde os depoimentos "moram" */
+.testimonial-slider {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    width: max-content; /* Garante que fiquem um ao lado do outro */
+}
+
+/* Cada card de depoimento deve ter um tamanho fixo para caberem 3 */
+.testimonial-card {
+    width: 300px; /* Ajuste conforme seu design */
+    flex-shrink: 0;
+}
+
+/* Container que segura as setas e o slider */
+.testimonial-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Área visível (a janela que só mostra 3) */
+.testimonial-slider-container {
+    width: 960px; /* 3 cards de 300px + gaps de 30px */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Trilho que move os depoimentos */
+.testimonial-slider {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
+}
+
+/* Cada card de depoimento individual */
+.testimonial-card {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+/* Onde os cards ficam um ao lado do outro */
+#projects-inner {
+    display: flex;
+    gap: 20px; /* Espaço entre os cards */
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
+}
+
+/* O card individual */
+.project-card {
+    width: 320px; /* Largura fixa */
+    flex-shrink: 0; /* Impede o card de esmagar */
+}
+
+.projects-container {
+    overflow: hidden; /* Isso esconde os outros cards */
+    width: 340px;    /* Largura de exatamente um card + margem */
+    margin: 0 auto;
+}
+
+#projects-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Sem isso ele não desliza */
+}
+
+/* Container que segura as setas e a janela */
+.project-slider-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 100px; /* Espaço para o idioma fixo não cobrir */
+}
+
+/* Área visível (A JANELA) - igual ao seu testimonial-slider-container */
+.projects-container {
+    width: 320px; /* Exibe 1 card por vez. Se quiser exibir 3, use 1000px */
+    overflow: hidden;
+    position: relative;
+}
+
+/* O TRILHO (O que desliza) - igual ao seu testimonial-slider */
+#projects-inner {
+    display: flex;
+    gap: 20px; /* Espaço entre os cards */
+    transition: transform 0.5s ease-in-out;
+    width: max-content; /* Garante que fiquem um ao lado do outro */
+}
+
+/* O CARD - igual ao seu testimonial-card */
+.project-card {
+    width: 320px;
+    flex-shrink: 0; /* IMPEDE de esmagar, igual ao depoimento */
+    background: var(--mario-dark-bg);
+    border: 4px solid var(--mario-brown);
+    padding: 20px;
+    box-shadow: 6px 6px 0px #000;
+}
+
+/* ==========================================================================
+   AJUSTES DA SEÇÃO SOBRE (BIO)
+   ========================================================================== */
+
+/* Container que envolve a boneca e o texto */
+.about-block {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* A boneca pixel art da bio */
+.anna-pixel-art {
+    width: 200px; 
+    height: auto;
+    image-rendering: pixelated; /* Mantém a nitidez dos pixels */
+    filter: drop-shadow(5px 5px 0px #000);
+}
+
+/* A caixa de texto (O RETÂNGULO) */
+.about-block .dialog-box {
+    background: #fff;
+    border: 6px solid #000;
+    padding: 30px;
+    color: #000;
+    width: 100%;
+    box-shadow: 10px 10px 0px var(--mario-yellow);
+    text-align: left; /* Alinhamento de leitura */
+    position: relative;
+}
+
+/* Estilo do texto dentro da caixa */
+/* Estilo do texto dentro da caixa de diálogo da bio */
+.about-block .dialog-box p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+    line-height: 1.8;
+    margin: 0;
+    text-transform: none; /* Mantém minúsculas para leitura fluida */
+    
+    /* A MÁGICA PARA JUSTIFICAR */
+    text-align: justify; 
+    
+    /* Opcional: evita que palavras grandes quebrem o layout */
+    hyphens: auto; 
+    word-break: break-word;
+}
+
+/* Responsividade: Em telas maiores, a boneca fica ao lado do texto */
+@media (min-width: 768px) {
+    .about-block {
+        flex-direction: row; /* Boneca na esquerda, texto na direita */
+        align-items: flex-start;
+    }
+}
+
+.dialog-box p {
+    margin: 0;
+    font-size: 11px; /* Fonte levemente menor para caber melhor o texto longo */
+    word-spacing: -2px; /* Estilo retro */
+    text-transform: none; /* Mantém letras minúsculas para facilitar a leitura */
+}
+
+.project-card h4 {
+    word-wrap: break-word; /* força quebra de linha se o texto for grande */
+    font-size: 1rem;       /* opcional: reduz um pouco o tamanho */
+}

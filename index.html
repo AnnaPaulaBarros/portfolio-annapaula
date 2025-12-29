@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Paula - Kingdom Quest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="language-selector" style="position: fixed; top: 10px; right: 10px; z-index: 999;">
+      <button onclick="changeLang('pt')">PT</button>
+      <button onclick="changeLang('en')">EN</button>
+      <button onclick="changeLang('es')">ES</button>
+      <button onclick="changeLang('fr')">FR</button>
+      <button onclick="changeLang('it')">IT</button>
+  </div>
+
+  <header id="hero" class="hero">
+ <img src="img/annapaula-hero.png" alt="Anna Paula Pixel" class="mario-start-img">
+   <h1 class="title">ANNA PAULA</h1>
+    <h3 class="subtitle">PORTFÓLIO</h3>
+    <p class="hero-text">Prepare-se para a aventura: transformo Dados, UX e Frontend em soluções incríveis!</p>
+    <button id="startBtn" class="mario-btn" onclick="startGame()">INÍCIO</button>
+  </header>
+
+  <main id="content" class="content hidden">
+    
+    <section id="about" class="level-section">
+      <h2 class="level-title">Olá, me chamo Anna Paula.</h2>
+      <div class="about-block">
+    <img src="img/annapaulaarvorautech-hero.png" alt="Anna Paula Pixel" class="anna-pixel-art">
+        <div class="dialog-box">
+          <p>Minha jornada começou no trajeto do banco para casa. Ao ver animais abandonados, percebi que precisava transformar essa realidade. Foi assim que nasceu o Miaucaomigo, um aplicativo que permite fotografar animais abandonados e marcar onde foram vistos, ajudando pessoas a adotarem em vez de comprarem, prevenindo abusos e salvando vidas. Na época, ainda não sabia programar. Então iniciei minha formação em Engenharia de Computação, fiz o ENEM e consegui bolsa pelo Prouni no curso de Análise e Desenvolvimento de Sistemas, complementando meus estudos com cursos técnicos. Com o tempo, encontrei minha essência na área e tive coragem de mudar de carreira, realizando o mestrado em Ciências de Dados para fortalecer meu perfil profissional.
+
+Hoje, utilizo a tecnologia para criar soluções digitais que impactam pessoas, animais e o agro, unindo propósito e inovação para gerar mudanças reais.</p>
+        </div>
+      </div>
+    </section>
+
+   <section id="services" class="level-section">
+  <h2 class="level-title">Meus Serviços</h2>
+  <div class="power-up-grid">
+
+    <div class="power-up-card">
+      <div class="item-icon-box">
+        <img src="img/dados.png" alt="Análise de Dados" class="pixel-icon"> 
+      </div>
+      <div class="item-info">
+        <h3>1</h3>
+        <p class="item-desc">Transformo dados em insights estratégicos para decisões de negócios, dashboards e análises financeiras.</p>
+        <span class="power-tag admin-tag">Dados</span>
+      </div>
+    </div>
+
+    <div class="power-up-card">
+      <div class="item-icon-box">
+        <img src="img/ux.png" alt="UX & Frontend" class="pixel-icon">
+      </div>
+      <div class="item-info">
+        <h3>2</h3>
+        <p class="item-desc">Criação de sites, aplicativos, identidade da marca e interfaces intuitivas que conectam pessoas à tecnologia.</p>
+        <span class="power-tag design-tag">UX / Frontend</span>
+      </div>
+    </div>
+
+    <div class="power-up-card">
+      <div class="item-icon-box">
+        <img src="img/automacao.png" alt="Automação" class="pixel-icon">
+      </div>
+      <div class="item-info">
+        <h3>3</h3>
+        <p class="item-desc">Automatizo processos, workflows e sistemas, economizando tempo e aumentando eficiência.</p>
+        <span class="power-tag efficiency-tag">Automação</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <section id="projects" class="level-section">
+  <h2 class="level-title">Meus Projetos</h2>
+
+  <div class="project-slider-wrapper">
+    <button class="mario-pipe-yellow" onclick="moveProject(-1)">◀</button>
+
+    <div class="projects-container">
+      <div id="projects-inner">
+
+        <!-- Projeto 01 -->
+      <div class="project-card">
+      <img src="img/adocao.png" class="card-thumb" alt="Miaucaomigo App">
+          <h4>Aplicativo</h4>
+          <p class="tech-stack">Flutter, Firebase, Google Maps API</p>
+          <div class="project-actions">
+            <a href="https://github.com/AnnaPaulaBarros/Miaucaomigo" target="_blank" class="mario-btn-small">GIT</a>
+          </div>
+        </div>
+
+          <!-- Projeto 02 -->
+        <div class="project-card">
+        <img src="img/site.png" class="card-thumb" alt="Idalina Barros Paisagismo">
+          <h4>Site</h4>
+          <p class="tech-stack">HTML, CSS, JS, Firebase</p>
+          <div class="project-actions">
+            <a href="https://github.com/AnnaPaulaBarros/idapaisagismo" target="_blank" class="mario-btn-small">GIT</a>
+          </div>
+        </div>
+
+      
+        <!-- Projeto 03 -->
+        <div class="project-card">
+        <img src="img/ida.png" class="card-thumb" alt="Topic Modeling LDA">
+          <h4>Dashboard</h4>
+          <p class="tech-stack">Python, R, Estatística</p>
+          <div class="project-actions">
+            <a href="https://github.com/AnnaPaulaBarros/An-lise-de-Conte-do-e-Modelagem-de-T-picos" target="_blank" class="mario-btn-small">GIT</a>
+          </div>
+        </div>
+
+        <!-- Projeto 04 -->
+        <div class="project-card">
+        <img src="img/libertadores.png" class="card-thumb" alt="Libertadores 2025">
+          <h4>Dashboard</h4>
+          <p class="tech-stack">Python, Análise Estatística</p>
+          <div class="project-actions">
+            <a href="https://github.com/AnnaPaulaBarros/Libertadores_2025" target="_blank" class="mario-btn-small">GIT</a>
+          </div>
+        </div>
+
+        <!-- Projeto 05 -->
+        <div class="project-card">
+        <img src="img/dashboard.png" class="card-thumb" alt="Automação">
+          <h4>Automação de Cadastro</h4>
+          <p class="tech-stack">Python, PyAutoGUI, Pandas</p>
+          <div class="project-actions">
+            <a href="https://github.com/AnnaPaulaBarros/automacaocompython" target="_blank" class="mario-btn-small">GIT</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="mario-pipe-yellow" onclick="moveProject(1)">▶</button>
+  </div>
+</section>
+
+    <section id="testimonials" class="level-section">
+        <h2 class="level-title">Depoimentos</h2>
+        
+        <div class="review-form-wrapper">
+            <h3>Deixe uma Estrela!</h3>
+            <form id="review-form">
+                <input type="text" id="review-name" placeholder="Seu nome" required>
+                <div class="star-rating">
+                    <span class="star" data-value="1">⭐</span>
+                    <span class="star" data-value="2">⭐</span>
+                    <span class="star" data-value="3">⭐</span>
+                    <span class="star" data-value="4">⭐</span>
+                    <span class="star" data-value="5">⭐</span>
+                </div>
+                <input type="hidden" id="star-value" value="5">
+                <textarea id="review-text" placeholder="Conte sua história..." required></textarea>
+                <button type="submit" class="mario-btn">ENVIAR</button>
+            </form>
+        </div>
+
+        <div class="testimonial-navigation">
+            <button class="mario-pipe-yellow" onclick="moveDepoimento(-1)">◀</button>
+            <div class="testimonial-slider-container">
+                <div class="testimonial-slider">
+                    </div>
+            </div>
+            <button class="mario-pipe-yellow" onclick="moveDepoimento(1)">▶</button>
+        </div>
+    </section>
+
+    <section class="level-section game-over-section">
+        <h2>GAME OVER</h2>
+        <p>OBRIGADO POR JOGAR!<br>SUA JORNADA FOI LENDÁRIA.</p>
+        <button onclick="restartGame()" class="mario-btn">FIM DE JOGO</button>
+    </section>
+
+    <footer class="social-footer">
+      <div class="social-container">
+          <a href="mailto:annapaula.barrosdasilva@gmail.com" class="social-btn">E-mail</a>
+          <a href="https://wa.me/+351935327294" class="social-btn">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/annapaulabds" class="social-btn">LinkedIn</a>
+      </div>
+    </footer>
+
+    <div id="project-modal" class="modal hidden">
+        <div class="modal-content dialog-box">
+            <span class="close-modal" onclick="document.getElementById('project-modal').classList.add('hidden')">&times;</span>
+            <h2 id="modal-title">Título</h2>
+            <p id="modal-description">Descrição...</p>
+            <div class="mario-coin-divider"></div>
+        </div>
+    </div>
+
+    <audio id="coinSound" src="https://www.myinstants.com/media/sounds/super-mario-coin-sound.mp3"></audio>
+
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
